@@ -1,20 +1,20 @@
 #include <cmath>
 #include <iostream>
 
-bool isPrimeHelper(int x, int n) {
-  if (x >= sqrt(n)) {
-    if ((int)(n / x) == (float)n / (float)x) {
+bool isPrimeHelper(const int& n, int div) {
+  if (div <= sqrt(n)) {
+    if ((n / div) * div == n) {
       return false;
     } else {
-      return isPrimeHelper(x - 1, n);
+      return isPrimeHelper(n, div + 2);
     }
   }
   return true;
 }
 
-bool isPrime(int n) {
-  if (!(n & 1)) return (n == 2);
-  return isPrimeHelper(n - 1, n);
+bool isPrime(const int& n) {
+  if ((n / 2) * 2 == n) return (n == 2);
+  return isPrimeHelper(n, 3);
 }
 
 int main() {
